@@ -1,4 +1,5 @@
 # type-script
+项目关于type-script的dome
 
 ## Project setup
 ```
