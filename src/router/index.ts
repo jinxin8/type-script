@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home";
+import layoutHeaderAside from "@/layout";
 
 Vue.use(VueRouter);
 
@@ -8,7 +9,14 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: layoutHeaderAside,
+    children: [
+      {
+        path: "index",
+        name: "index",
+        component: Home
+      }
+    ]
   },
   {
     path: "/about",

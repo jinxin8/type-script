@@ -1,15 +1,12 @@
 import { Component, Vue } from "vue-property-decorator";
 
+import "./app.scss";
 @Component
 export default class App extends Vue {
   name = "App";
   render() {
     return (
       <div id="app">
-        <div id="nav">
-          <router-link to="/">Home</router-link> |
-          <router-link to="/about">About</router-link>
-        </div>
         <router-view />
       </div>
     );
