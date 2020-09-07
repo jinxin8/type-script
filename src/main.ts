@@ -16,6 +16,7 @@ new Vue({
   store,
   render: h => h(App),
   created() {
+    // 设置顶部菜单
     this.$store.commit("menu/headerSet", menuHeader);
     // 设置侧边栏菜单
     this.$store.commit("menu/asideSet", menuAside);

@@ -4,7 +4,9 @@ const menu = {
     // 顶栏菜单
     header: [],
     // 侧栏菜单
-    aside: []
+    aside: [],
+    // 侧边栏是否收起
+    asideCollapse: false
   },
   actions: {},
   mutations: {
@@ -25,6 +27,15 @@ const menu = {
     asideSet(state: { aside: object }, menu: []) {
       // store 赋值
       state.aside = menu;
+    },
+    /**
+     * @description 设置侧边栏菜单是否收起
+     * @param {Object} state state
+     * @param {Array} flag flag setting
+     */
+    asideCollapseSet(state: { asideCollapse: boolean }, flag: boolean) {
+      // store 赋值
+      state.asideCollapse = flag;
     }
   }
 };

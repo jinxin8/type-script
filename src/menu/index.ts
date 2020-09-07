@@ -23,20 +23,18 @@ function supplementPath(menu: MenuItem[]): object[] {
   }));
 }
 
-export const menuHeader = supplementPath([
-  { path: "/indexPage", title: "首页", icon: "" },
-  {
-    title: "管理中心",
-    icon: "",
-    children: [
-      { path: "/filesUpload", title: "文档上传", icon: "" },
-      { path: "/trainingRelease", title: "培训发布", icon: "" },
-      { path: "/bannertrain", title: "banner发布", icon: "" },
-      { path: "/announcement", title: "公告发布", icon: "" }
-    ]
-  }
-]);
+export const menuHeader = supplementPath([]);
 
 export const menuAside = supplementPath([
-  { path: "/indexPage", title: "首页", icon: "" }
+  { path: "/indexPage", title: "首页", icon: "home" },
+  { path: "/quillPage", title: "富文本", icon: "file-text" },
+  {
+    title: "视频",
+    icon: "video-camera",
+    children: [
+      { path: "/videoPage/photo", title: "视频第一帧", icon: "scissor" }
+      // { path: "/videoPage/disfast", title: "禁止快进", icon: "forward" }
+    ]
+  }
+  // { path: "/quillPage", title: "文件打包", icon: "file-zip" }
 ]);

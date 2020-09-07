@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home";
 import layoutHeaderAside from "@/layout";
 
 Vue.use(VueRouter);
@@ -8,20 +7,30 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "Home",
+    redirect: { name: "indexPage" },
     component: layoutHeaderAside,
     children: [
       {
-        path: "index",
-        name: "index",
-        component: Home
+        path: "indexPage",
+        name: "indexPage",
+        component: () => import("@/views/indexPage")
+      },
+      {
+        path: "quillPage",
+        name: "quillPage",
+        component: () => import("@/views/quillPage")
+      },
+      {
+        path: "videoPage/photo",
+        name: "videophoto",
+        component: () => import("@/views/videoPage/videoPhoto")
+      },
+      {
+        path: "videoPage/disfast",
+        name: "videodisfast",
+        component: () => import("@/views/videoPage/videodisFast")
       }
     ]
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () => import("@/views/About")
   }
 ];
 

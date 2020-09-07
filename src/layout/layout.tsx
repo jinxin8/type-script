@@ -1,6 +1,8 @@
 import { Component } from "vue-property-decorator";
 import { HeightMixin } from "./mixins/getHeight";
 
+import "./layout.scss";
+
 @Component({
   components: {
     "menu-side": () => import("./components/menu")
@@ -11,7 +13,10 @@ export default class App extends HeightMixin {
   render() {
     return (
       <div id="nav" style={`height:${this.getHeight}px;`}>
-        <menu-side></menu-side>
+        <menu-side getHeight={this.getHeight}></menu-side>
+        <div class="content">
+          <router-view />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import menu from "./modules/menu";
+import createPersistedState from "vuex-persistedstate";
 
 // const files = require.context("./modules", false, /\.ts$/);
 // const modules: any = {};
@@ -22,5 +23,15 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     menu
-  }
+  },
+  plugins: [
+    createPersistedState({
+      storage: window.localStorage,
+      reducer(val: any) {
+        return {
+          menu: { asideCollapse: val.menu.asideCollapse }
+        };
+      }
+    })
+  ]
 });

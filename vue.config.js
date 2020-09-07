@@ -19,7 +19,10 @@ const vueConfig = {
   publicPath: `/${process.env.VUE_APP_PATH}`,
 
   chainWebpack: config => {
-    config.resolve.alias.set("@$", resolve("src"));
+    config.resolve.alias
+      .set("@api", resolve("src/api"))
+      .set("@", resolve("src"))
+      .set("$public", resolve("public"));
 
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear();

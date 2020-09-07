@@ -1,3 +1,24 @@
-.ant-menu {
+.menuList {
   height: 100%;
+  .menutitle {
+    line-height: 40px;
+    height: 40px;
+    font-size: 16px;
+    position: relative;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    text-align: center;
+    padding-right: 26px;
+    .menubtn {
+      position: absolute;
+      top: 11px;
+      right: 10px;
+    }
+  }
+  .ant-menu {
+    height: 100%;
+    // .ant-menu-item {
+    //   text-align: left;
+    // }
+  }
 }
