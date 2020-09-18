@@ -1,0 +1,44 @@
+.execComcont {
+  height: 100%;
+  .execont {
+    width: 85%;
+    height: 77%;
+    margin: 20px auto 0 auto;
+    background: #efefef;
+    display: flex;
+    justify-content: space-between;
+    .left {
+      width: 50%;
+      box-sizing: border-box;
+      border-right: 1px solid #dddd;
+      text-align: center;
+      .text {
+        height: 220px;
+        margin: 20px 20px 0 20px !important;
+        padding: 10px;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #d9d9d9;
+        text-align: left;
+      }
+      .ant-input {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+    .right {
+      width: 50%;
+      text-align: center;
+      .ant-input {
+        width: 90%;
+        margin: 20px 5% 20px 5%;
+      }
+    }
+    .tiptxt {
+      font-size: 16px;
+      margin-top: 30px !important;
+    }
+  }
+}

@@ -29,6 +29,16 @@ const routes: Array<RouteConfig> = [
         path: "videoPage/disfast",
         name: "videodisfast",
         component: () => import("@/views/videoPage/videodisFast")
+      },
+      {
+        path: "zipPage",
+        name: "zipPage",
+        component: () => import("@/views/zipPage")
+      },
+      {
+        path: "execComPage",
+        name: "execComPage",
+        component: () => import("@/views/execComPage")
       }
     ]
   }

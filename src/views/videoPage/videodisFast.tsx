@@ -53,57 +53,57 @@ export default class VideoPhoto extends Vue {
     this.player.on("error", function() {
       // this.$message.warning('异常，无法播放');
     });
+    this.disAbleQucik();
   }
 
-  // 截取视频第一张图
-  findvideocover() {
-    // 当页面中没有video元素，通过url截取时
-    // const video = document.createElement('video');
-    // video.src = this.vedioUrl;
-    // video.currentTime = 1;
-    // const self = this;
-    // loadeddata是当前帧的数据加载完成且还没有足够的数据播放视频 / 音频（audio / video）的下一帧时触发
-    // video.addEventListener("loadeddata", function(){
-    // canvas方法
-    // });
-    // 当页面中有video元素时
-    const video: any = this.$refs.videoPlayer;
-    const canvas: any = document.createElement("canvas");
-    canvas.width = video.offsetWidth;
-    canvas.height = video.offsetWidth;
-    console.log(video.offsetWidth, video.offsetHeight);
-    canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.width);
-    this.baseUrl = canvas.toDataURL("image/png");
-    this.newfile = this.dataURLtoFile(this.baseUrl, "base64.png");
-    this.uploadImgToBase64(this.newfile).then((data: any) => {
-      this.imgUrl = data.result;
-      // 上传图片地址方法
-      // self.uploadimage();
-    });
-  }
-  dataURLtoFile(dataurl: any, filename: any) {
-    const arr = dataurl.split(",");
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+  disAbleQucik() {
+    const that = this.player;
+    let isMousedown = false;
+    let isDrag = false;
+    let curTime = 0;
+    let maxTime = 0;
+    const progressOne = document.getElementsByClassName(
+      "vjs-progress-holder"
+    )[0];
+    const progressTwo = document.getElementsByClassName(
+      "vjs-progress-control"
+    )[0];
+    function mouseOverFun() {
+      isDrag = true;
     }
-    // 转换成file对象
-    return new File([u8arr], filename, { type: mime });
-  }
-  uploadImgToBase64(file: any) {
-    // 核心方法，将图片转成base64字符串形式
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function() {
-        // 图片转base64完成后返回reader对象
-        resolve(reader);
-      };
-      reader.onerror = reject;
+    function down() {
+      curTime = that.currentTime();
+      isMousedown = true;
+      progressTwo.addEventListener("mousemove", mouseOverFun);
+      if (curTime > maxTime) {
+        that.currentTime(maxTime);
+        // this.$message.warning("不能节选课程");
+      }
+    }
+    function up() {
+      isDrag = false;
+      curTime = that.currentTime();
+      if (curTime > maxTime) {
+        that.currentTime(maxTime);
+      }
+      progressTwo.removeEventListener("mousemove", mouseOverFun, false);
+    }
+    function timego() {
+      if (that.currentTime() > maxTime && !isMousedown && !isDrag) {
+        maxTime = that.currentTime();
+        // console.log('max', maxTime);
+      }
+    }
+    // that.on("pause", function() {});
+    that.on("play", function() {
+      isMousedown = false;
     });
+
+    progressOne.addEventListener("mousedown", down);
+    progressOne.addEventListener("mouseup", up);
+    progressTwo.addEventListener("mousedown", down);
+    progressTwo.addEventListener("mouseup", up);
+    that.on("timeupdate", timego);
   }
 
   render() {
@@ -118,28 +118,15 @@ export default class VideoPhoto extends Vue {
         <p class="quilltitle" style="line-height:40px;">
           禁止视频进行快进，允许视频后退
         </p>
-        <div class="videocont">
-          <p class="left">
-            <video
-              ref="videoPlayer"
-              class="video-js"
-              style="width:100%;height:100%;"
-            >
-              <source
-                src={require("@/assets/testvideo.mp4")}
-                type="video/mp4"
-              />
-            </video>
-          </p>
-          <p class="right">
-            {!this.imgUrl || <img src={this.imgUrl} alt="" class="icon" />}
-          </p>
+        <div class="videofastc" style="">
+          <video
+            ref="videoPlayer"
+            class="video-js"
+            style="width:100%;height:100%;"
+          >
+            <source src={require("@/assets/testvideo.mp4")} type="video/mp4" />
+          </video>
         </div>
-        <p class="btn">
-          <a-button type="primary" onClick={this.findvideocover}>
-            截取视频
-          </a-button>
-        </p>
       </div>
     );
   }

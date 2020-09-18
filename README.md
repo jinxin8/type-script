@@ -8,6 +8,8 @@
 2. video.js 截取视频某一帧
 3. video.js 视频可以后退，禁止快进
 4. 下载多个文件时，为避免选择多次存储地址，将下载的多个文件打一个压缩包
+5. 使用 cryptoJs 方式加密
+6. execCommand 实现复制
 
 ## Project setup
 

@@ -41,6 +41,11 @@ export default class QuillPage extends HeightMixin {
         this.$message.error("图片插入失败");
       }
     } else if (info.file.status === "error") {
+      console.log(info);
+      const quill: any = this.$refs.myQuillEditor;
+      const length = quill.getSelection().index;
+      quill.insertEmbed(length, "image", this.uploadImgToBase64(info.file));
+      quill.setSelection(length + 1);
       this.$message.error("图片插入失败");
     }
   }
@@ -52,6 +57,18 @@ export default class QuillPage extends HeightMixin {
     } else {
       this.TiLength = e.quill.getLength() - 1;
     }
+  }
+  uploadImgToBase64(file: any) {
+    // 核心方法，将图片转成base64字符串形式
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        // 图片转base64完成后返回reader对象
+        resolve(reader);
+      };
+      reader.onerror = reject;
+    });
   }
 
   render() {

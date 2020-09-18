@@ -32,9 +32,11 @@ export const menuAside = supplementPath([
     title: "视频",
     icon: "video-camera",
     children: [
-      { path: "/videoPage/photo", title: "视频第一帧", icon: "scissor" }
-      // { path: "/videoPage/disfast", title: "禁止快进", icon: "forward" }
+      { path: "/videoPage/photo", title: "视频第一帧", icon: "scissor" },
+      { path: "/videoPage/disfast", title: "禁止快进", icon: "forward" }
     ]
-  }
-  // { path: "/quillPage", title: "文件打包", icon: "file-zip" }
+  },
+  { path: "/zipPage", title: "文件打包", icon: "file-zip" },
+  // { path: "/zipPage", title: "加密", icon: "eye-invisible" },
+  { path: "/execComPage", title: "复制", icon: "copy" }
 ]);
